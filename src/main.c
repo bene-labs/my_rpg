@@ -395,7 +395,7 @@ void handle_events(sfRenderWindow *window, all_t *objects, sfEvent event)
         sfVector2f pos = {600, 200};
         if (!objects->dialogue_box.is_active && sfMouse_isButtonPressed(sfMouseLeft) && !objects->is_mouse_held && is_collision_cursor_button(sfMouse_getPositionRenderWindow(window), sfSprite_getPosition(objects->cur_room->reaper.sprite), 100, 100) \
 || (is_sprite_inside_radius(objects->player.body, 20.0, sfSprite_getPosition(objects->cur_room->reaper.sprite).x +50, sfSprite_getPosition(objects->cur_room->reaper.sprite).y + 50) && sfKeyboard_isKeyPressed(sfKeyE))) {
-            prepare_dialogue_box(objects, "Test!\ntoto\n1234567890123456789", pos, &objects->dialogue_box, &objects->cur_room->reaper);
+            prepare_dialogue_box(objects, "Greetings lost soul.\nYou got something for me?", pos, &objects->dialogue_box, &objects->cur_room->reaper);
         } else {
             if ((check_button_interaction(&objects->dialogue_box.close, window,
                 60, 60) && !objects->is_mouse_held) || sfKeyboard_isKeyPressed(sfKeyEscape))
@@ -404,7 +404,7 @@ void handle_events(sfRenderWindow *window, all_t *objects, sfEvent event)
                 if (check_button_interaction(&objects->dialogue_box.talk,
                     window, 231, 152))
                     prepare_dialogue_box(objects,
-                        "Hi there!\nThis is another test i guess.\n", pos,
+                        "Hi there!\nHow about we make a deal?\nYou give me your soul(s)\n and i bless you with power.", pos,
                         &objects->dialogue_box,
                         &objects->cur_room->reaper);
                 if (check_button_interaction(&objects->dialogue_box.shop,
@@ -426,7 +426,7 @@ void handle_events(sfRenderWindow *window, all_t *objects, sfEvent event)
                         sfText_setString(objects->player.soul_text, objects->player.soul_string);
                         prepare_dialogue_box(objects, "Thx 4 purchase\n", pos, &objects->dialogue_box, &objects->cur_room->reaper);
                     } else
-                        prepare_dialogue_box(objects, "Thx 4 purchase\n", pos, &objects->dialogue_box, &objects->cur_room->reaper);
+                        prepare_dialogue_box(objects, "your pocket looks as empty\n as my eye sockets\n", pos, &objects->dialogue_box, &objects->cur_room->reaper);
                 }
                 if (check_button_interaction(&objects->dialogue_box.speed, window,231, 152)) {
                     if (objects->player.soul_count >=
