@@ -174,38 +174,38 @@ void refresh_player_lives(player_t *player)
 void update_stats(player_t *player, stats_display_t *stats)
 {
     free(stats->str);
-    stats->str = my_strcpy("000.0\n\n00.00\n\n0000\n\n0000");
-    int pre = player->damage;
-    int after = player->damage - pre * 10;
-    for (int i = 0; i < pre; i++) {
+    stats->str = my_strcpy("000.0\n\n00.00\n\n000.0\n\n000.0");
+    int pre = player->projectile.damage;
+    int after = (player->projectile.damage - pre) * 10;
+    for (int i = 0; i < pre && i < 999; i++) {
         add_points(stats->str, 2);
     }
-    for (int i = 0; i < after; i++) {
+    for (int i = 0; i < after && after < 9; i++) {
         add_points(stats->str, 4);
     }
     pre = (int) player->shot_speed;
-    for (int i = 0; i < pre; i++) {
+    for (int i = 0; i < pre && i < 99; i++) {
         add_points(stats->str, 8);
     }
-    after = player->shot_speed - pre * 100;
-    for (int i = 0; i < after; i++) {
+    after = (player->shot_speed - pre) * 100;
+    for (int i = 0; i < after && i < 99; i++) {
         add_points(stats->str, 11);
     }
     pre = player->projectile.speed;
-    for (int i = 0; i < pre; i++) {
-        add_points(stats->str, 17);
+    for (int i = 0; i < pre && i < 999; i++) {
+        add_points(stats->str, 16);
     }
-    /*after = player->projectile.speed - pre * 10;
-    for (int i = 0; i < after; i++) {
+    after = (player->projectile.speed - pre) * 10;
+    for (int i = 0; i < after && i < 9; i++) {
         add_points(stats->str, 18);
-    }*/
+    }
     pre = player->speed;
-    for (int i = 0; i < pre; i++) {
+    for (int i = 0; i < pre && i < 999; i++) {
         add_points(stats->str, 23);
     }
-    /*after = player->speed - pre * 10;
-    for (int i = 0; i < after; i++) {
+    after = (player->speed - pre) * 10;
+    for (int i = 0; i < after && after < 9; i++) {
         add_points(stats->str, 25);
-    }*/
+    }
     sfText_setString(stats->text, stats->str);
 }
