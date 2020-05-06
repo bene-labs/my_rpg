@@ -419,7 +419,7 @@ void handle_events(sfRenderWindow *window, all_t *objects, sfEvent event)
                         if (objects->player.max_hp >= 20)
                             sfText_setString(objects->dialogue_box.hp.text, "out of stock!\nsorry :(");
                         objects->player.cur_hp = objects->player.max_hp;
-                        refresh_player_lives(&objects->player);
+                        refresh_player_lives(&objects->player, objects);
                         objects->player.soul_count -= objects->dialogue_box.hp.value;
                         for (int i = 0; i < objects->dialogue_box.hp.value; i++)
                             remove_points(objects->player.soul_string, 3);

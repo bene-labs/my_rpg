@@ -125,9 +125,7 @@ void move_projectile(projectile_t *projectile, room_t *cur_room, all_t *objects)
             if (sfClock_getElapsedTime(objects->player.invincibillity_clock).microseconds > SEC / objects->player.invincibillity_duaration) {
                 sfClock_restart(objects->player.invincibillity_clock);
                 objects->player.cur_hp--;
-                if (objects->player.cur_hp <= 0)
-                    objects->credits = 1;
-                refresh_player_lives(&objects->player);
+                refresh_player_lives(&objects->player, objects);
             }
             //sfSprite_setColor(objects->player.body, sfRed);
             //sfSprite_setColor(objects->player.head, sfRed);

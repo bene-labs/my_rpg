@@ -271,7 +271,7 @@ sfTexture_createFromFile("resources/sprites/player/player_1_head.png", NULL), sf
     objects->player.speed = SPEED;
     objects->player.cur_hp = HP;
     objects->player.max_hp = HP;
-    refresh_player_lives(&objects->player);
+    refresh_player_lives(&objects->player, objects);
     objects->player.animation_rects= malloc(sizeof(sfIntRect *) * 8);
     for (int height = 0; i < 8; height += 100, i++) {
         objects->player.animation_rects[i] = malloc(sizeof(sfIntRect) * 3);

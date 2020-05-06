@@ -94,7 +94,7 @@ void move_enemies_by_their_vector(enemy_list_t *enemies, player_t *player, room_
                 if (sfClock_getElapsedTime(player->invincibillity_clock).microseconds > SEC / player->invincibillity_duaration) {
                     sfClock_restart(player->invincibillity_clock);
                     player->cur_hp--;
-                    refresh_player_lives(player);
+                    refresh_player_lives(player, objects);
                 }
             }
             for (sprite_list_t *obstacles = cur_room->obstacles->next; temp->enemy->template.movement_type == MOVE_RANDOM && obstacles; obstacles = obstacles->next) {

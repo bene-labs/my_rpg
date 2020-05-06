@@ -104,7 +104,7 @@ void handle_obstacle(room_t *cur_room, player_t *player, sfVector2f backwards, i
             if (sfClock_getElapsedTime(player->invincibillity_clock).microseconds > SEC / player->invincibillity_duaration) {
                 sfClock_restart(player->invincibillity_clock);
                 player->cur_hp--;
-                refresh_player_lives(player);
+                refresh_player_lives(player, objects);
             }
             sfSprite_move(player->body, backwards);
             sfSprite_move(player->head, backwards);
@@ -147,12 +147,14 @@ void handle_obstacle(room_t *cur_room, player_t *player, sfVector2f backwards, i
     }
 }
 
-void refresh_player_lives(player_t *player)
+void refresh_player_lives(player_t *player, all_t *objects)
 {
     int sprite = 0;
     int i = 0;
     int j = 0;
 
+    if (player->cur_hp <= 0)
+        objects->credits = 1;
     for (j = 1; i < player->cur_hp && sprite < 10; i++, j++) {
         if (j > 2) {
             sprite++;

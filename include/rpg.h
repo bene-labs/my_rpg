@@ -78,7 +78,7 @@ void create_enemy_projectile(enemy_t *enemy, projectile_list_t *sprites,
 );
 void draw_minimap(sfRenderWindow *window);
 void refresh_enemy_health_bar(enemy_t *enemy, all_t *objects, double cur_hp, double max_hp);
-void refresh_player_lives(player_t *player);
+void refresh_player_lives(player_t *player, all_t *objects);
 void remove_prev_room_objects(all_t *objects);
 void handle_room_clear(enemy_list_t *enemies, all_t *objects);
 void create_objects_text(all_t *objects);
