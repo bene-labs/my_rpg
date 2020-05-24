@@ -61,19 +61,3 @@ void prepare_dialogue_box(all_t *objects, char *str, sfVector2f position, dialog
     sfText_setPosition(dialogueBox->back.text, sfSprite_getPosition(dialogueBox->back.sprite));
     sfText_move(dialogueBox->back.text, dialogueBox->back.text_gap);
 }
-
-void handle_shop_purchase(dialogue_box_t *dialogue_box, player_t *player, button_t *button, all_t *objects)
-{
-    sfVector2f pos = {600, 200};
-
-        player->soul_count -= button->value;
-        for (int i = 0; i < 2; i++)
-            add_points(button->str, button->nb_end);
-        sfText_setString(button->text, button->str);
-        for (int i = 0; i < button->value; i++)
-            remove_points(player->soul_string, 3);
-        sfText_setString(player->soul_text, player->soul_string);
-        button->value += 2;
-        prepare_dialogue_box(objects, "Thx 4 purchase\n", pos, &objects->dialogue_box, &objects->cur_room->reaper);
-        update_stats(player, &objects->stats);
-}

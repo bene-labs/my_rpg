@@ -8,7 +8,7 @@
 #ifndef MUL_MY_RPG_2019_RPG_H
 #define MUL_MY_RPG_2019_RPG_H
 #define DEBUG (0)
-#define SOUL_START (0)
+#define SOUL_START (1)
 #define LEFT (2)
 #define RIGHT (3)
 #define UP (5)
@@ -16,9 +16,9 @@
 #define NONE (11)
 #define MAP_WIDTH (7)
 #define MAP_HEIGHT (7)
-#define S_SPEED (2.5)
-#define P_SPEED (444.44)
-#define SPEED (666.6)
+#define S_SPEED (2.50)
+#define P_SPEED (666.6)
+#define SPEED (444.44)
 #define DAMAGE (6.66)
 #define HP (8)
 #define SEC (1000000)
@@ -95,4 +95,10 @@ int is_sprite_inside_radius(sfSprite *sprite, double radius, int origin_x, int o
 void init_boss_fight(all_t *objects, room_t *room);
 void credits(sfRenderWindow *window);
 void update_stats(player_t *player, stats_display_t *stats);
+void debug_map(all_t *objects);
+void handle_shop(all_t *objects, sfRenderWindow *window);
+void handle_shopkeeper_purchase_buttons(all_t *objects, sfRenderWindow *window, sfVector2f pos);
+void handle_boss_summoner_dialogue(all_t *objects, sfRenderWindow *window);
+void menu(sfRenderWindow *window);
+void handle_enemy_movement(all_t *objects);
 #endif //MUL_MY_RPG_2019_RPG_H

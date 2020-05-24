@@ -4,6 +4,33 @@
 
 #include "../include/rpg.h"
 
+void handle_boss_summoner_dialogue(all_t *objects, sfRenderWindow *window)
+{
+    if (map[curr_room_x][curr_room_y]->is_boss_room && !objects->cur_room->is_bossfight) {
+        sfVector2f pos = {600, 200};
+        if (!objects->dialogue_box.is_active &&
+            sfMouse_isButtonPressed(sfMouseLeft) && !objects->is_mouse_held &&
+            is_collision_cursor_button(sfMouse_getPositionRenderWindow(window),
+                sfSprite_getPosition(objects->cur_room->statue.sprite), 100,
+                100) \
+ || (is_sprite_inside_radius(objects->player.body, 20.0,
+            sfSprite_getPosition(objects->cur_room->statue.sprite).x + 50,
+            sfSprite_getPosition(objects->cur_room->statue.sprite).y + 50) &&
+            sfKeyboard_isKeyPressed(sfKeyE))) {
+            prepare_dialogue_box(objects, "Foolish Mortal!\nYou wish to challenge my master?\nYou must be insane.",
+                pos, &objects->dialogue_box, &objects->cur_room->statue);
+        } else {
+            if ((check_button_interaction(&objects->dialogue_box.close, window,
+                60, 60) && !objects->is_mouse_held) ||
+                sfKeyboard_isKeyPressed(sfKeyEscape))
+                objects->dialogue_box.is_active = 0;
+        }
+        if (check_button_interaction(&objects->dialogue_box.shop, window,
+            231, 152) && !objects->is_mouse_held)
+            init_boss_fight(objects, objects->cur_room);
+    }
+}
+
 void init_boss_fight(all_t *objects, room_t *room)
 {
     sfVector2f position = sfSprite_getPosition(room->background_sprite);

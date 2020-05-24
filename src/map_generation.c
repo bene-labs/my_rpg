@@ -62,7 +62,7 @@ void fill_map(int x, int y, int direction)
         handled_directions *= forbidden;
     }
     while (handled_directions != LEFT * RIGHT * UP * DOWN) {
-        do
+        do    //debug_print();
             next_direction = directions[rand() % 4];
         while (handled_directions % next_direction == 0);
         next_x = x;
@@ -200,5 +200,4 @@ void init_map(void)
     map[(rand() % 2) * (MAP_WIDTH - 1)][(rand() % 2) * (MAP_HEIGHT - 1)]->is_boss_room = 1;
     make_imperfect();
     load_rooms_into_map();
-    //debug_print();
 }

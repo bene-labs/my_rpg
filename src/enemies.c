@@ -145,3 +145,45 @@ void animate_enemies(enemy_list_t *enemies, all_t *objects)
         temp = temp->next;
     }
 }
+
+void handle_enemy_movement(all_t *objects)
+{
+    time_t last_tick;
+    int tick_length = 3;
+    int rand_loc_x = 0;
+    int rand_loc_y = 0;
+    enemy_list_t *enemies = objects->cur_room->enemies->next;
+    sfVector2f player_pos = sfSprite_getPosition(objects->player.body);
+    sfVector2f enemy_pos;
+    float length = 0;
+    time_t curr_time;
+    time(&curr_time);
+
+    if (curr_time - last_tick >= tick_length) {
+        srand((unsigned) time(&last_tick));
+        rand_loc_x = rand() % 1920;
+        rand_loc_y = rand() % 1280;
+    }
+    for (; enemies != 0; enemies = enemies->next) {
+        enemy_pos = sfSprite_getPosition(enemies->enemy->sprite);
+        if (enemies->enemy->template.movement_type == MOVE_FOLLOW_X) enemy_pos.x += sfSprite_getGlobalBounds(enemies->enemy->sprite).width / 2 - 50;
+        if (enemies->enemy->template.movement_type == MOVE_RANDOM) {
+            enemies->enemy->move.x = rand_loc_x - player_pos.x;
+            enemies->enemy->move.y = rand_loc_y - player_pos.y;
+        } else {
+            enemies->enemy->move.x = player_pos.x - enemy_pos.x;
+            enemies->enemy->move.y = player_pos.y - enemy_pos.y;
+        }
+        if (enemies->enemy->template.movement_type == MOVE_FOLLOW_X)
+            enemies->enemy->move.y = 0;
+        if (enemies->enemy->backwards == 1) {
+            enemies->enemy->move.x *= -1;
+            enemies->enemy->move.y *= -1;
+        }
+        length = sqrt(powf(enemies->enemy->move.x, 2) + powf(enemies->enemy->move.y, 2));
+        if (length != 0) {
+            enemies->enemy->move.x /= length;
+            enemies->enemy->move.y /= length;
+        }
+    }
+}
