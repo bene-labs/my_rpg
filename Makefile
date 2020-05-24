@@ -32,7 +32,10 @@ SRC	=	src/main.c					\
 		src/npc.c					\
 		src/buttons.c					\
 		src/boss.c					\
-		src/handle_randomness.c
+		src/handle_randomness.c				\
+		src/menu.c					\
+		src/shop.c					\
+		src/mini_map.c
 
 OBJ	=	$(SRC:.c=.o)
 
